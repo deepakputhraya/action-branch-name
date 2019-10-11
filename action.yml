@@ -1,0 +1,16 @@
+name: 'Github Branch name rules'
+description: 'Github action to enforce naming convention on branch names'
+author: 'deepakputhraya'
+inputs:
+  regex:
+    description: 'Regex to validate the branch name'
+    default: ''
+  allowed_prefixes:
+    description: 'Comma separated list of prefix that must be used in every branch. eg: feature,hotfix,JIRA-'
+    default: ''
+runs:
+  using: 'node12'
+  main: 'index.js'
+branding:
+  icon: 'alert-triangle'
+  color: 'gray-dark'

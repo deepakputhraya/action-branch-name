@@ -1,0 +1,14 @@
+name: Branch convention
+# This workflow is triggered on pushes to the repository.
+on: [push, pull_request]
+
+jobs:
+  build:
+    # Job name is Greeting
+    name: Check
+    # This job runs on Linux
+    runs-on: 'node12'
+    steps:
+      # This step prints an output (time) from the previous step's action.
+      - name: Validate
+        run: node index.js

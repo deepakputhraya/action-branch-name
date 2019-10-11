@@ -1,0 +1,19 @@
+{
+  "name": "action-branch-name",
+  "version": "1.0.0",
+  "description": "Github action to enforce naming convention on branch names",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "github",
+    "actions"
+  ],
+  "author": "deepakputhraya",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.1.3",
+    "@actions/github": "^1.1.0"
+  }
+}
