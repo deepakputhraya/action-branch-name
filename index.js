@@ -41,7 +41,7 @@ async function run() {
         const regex = RegExp(core.getInput('regex'));
         core.info(`Regex: ${regex}`);
         if (!regex.test(branch)) {
-            core.setFailed(`Branch ${branch} failed to pass match regex - ${regex}`);
+            core.setFailed(`Branch ${JSON.stringify(branch)} failed to pass match regex - ${regex}`);
             return
         }
 
