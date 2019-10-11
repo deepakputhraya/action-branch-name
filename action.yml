@@ -19,8 +19,8 @@ inputs:
     default: -1
 
 runs:
-  using: 'node12'
-  main: 'index.js'
+  using: 'docker'
+  image: 'Dockerfile'
 branding:
   icon: 'alert-triangle'
   color: 'gray-dark'
