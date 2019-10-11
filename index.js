@@ -7,11 +7,11 @@ function getBranchName(eventName, payload) {
     let branchName;
     switch (eventName) {
         case 'push':
-            payload.refs.replace('refs/heads/', '');
+            payload.ref.replace('refs/heads/', '');
             branchName = payload;
             break;
         case 'pull_request':
-            branchName = payload.head.ref;
+            branchName = payload.pull_request.head.ref;
             break;
         default:
             throw new Error(`Invalid event name: ${eventName}`);
@@ -30,6 +30,10 @@ async function run() {
         // TODO: validate regex
         // TODO: validate prefixes
 
+        // Get the JSON webhook payload for the event that triggered the workflow
+        const payload = JSON.stringify(github.context.payload, undefined, 2);
+        console.log(`The event payload: ${payload}`);
+
         const branch = getBranchName(eventName, github.context.payload);
 
         const regex = RegExp(core.getInput('regex'));
@@ -45,9 +49,6 @@ async function run() {
             core.setFailed(`Branch ${branch} failed did not match any of the prefixes - ${prefixes}`);
             return
         }
-        // Get the JSON webhook payload for the event that triggered the workflow
-        const payload = JSON.stringify(github.context.payload, undefined, 2);
-        console.log(`The event payload: ${payload}`);
     } catch (error) {
         core.setFailed(error.message);
     }
