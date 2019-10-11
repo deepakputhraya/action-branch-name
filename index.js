@@ -13,7 +13,9 @@ async function run() {
         console.log(`Allowed Prefixes: ${allowedPrefixes}`);
 
         // Get the JSON webhook payload for the event that triggered the workflow
+        const eventType = JSON.stringify(github.context.eventName, undefined, 2);
         const payload = JSON.stringify(github.context.payload, undefined, 2);
+        console.log(`The event type: ${eventType}`);
         console.log(`The event payload: ${payload}`);
     } catch (error) {
         core.setFailed(error.message);
