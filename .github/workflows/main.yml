@@ -9,7 +9,7 @@ jobs:
     # This job runs on Linux
     runs-on: 'ubuntu-latest'
     steps:
-      - uses: deepakputhraya/action-branch-name@master
+      - uses: deepakputhraya/action-branch-name@test
         with:
           regex: '([a-z])+\/([a-z])+'
           allowed_prefixes: 'feature,stable,fix'
