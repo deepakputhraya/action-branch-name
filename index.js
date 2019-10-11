@@ -7,8 +7,7 @@ function getBranchName(eventName, payload) {
     let branchName;
     switch (eventName) {
         case 'push':
-            payload.ref.replace('refs/heads/', '');
-            branchName = payload;
+            branchName = payload.ref.replace('refs/heads/', '');
             break;
         case 'pull_request':
             branchName = payload.pull_request.head.ref;
@@ -41,7 +40,7 @@ async function run() {
         const regex = RegExp(core.getInput('regex'));
         core.info(`Regex: ${regex}`);
         if (!regex.test(branch)) {
-            core.setFailed(`Branch ${JSON.stringify(branch)} failed to pass match regex - ${regex}`);
+            core.setFailed(`Branch ${branch} failed to pass match regex - ${regex}`);
             return
         }
 
