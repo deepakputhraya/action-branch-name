@@ -7,8 +7,11 @@ jobs:
     # Job name is Greeting
     name: Check
     # This job runs on Linux
-    runs-on: 'node12'
+    runs-on: 'ubuntu-latest'
     steps:
-      # This step prints an output (time) from the previous step's action.
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'      # This step prints an output (time) from the previous step's action.
       - name: Validate
         run: node index.js
