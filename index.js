@@ -52,6 +52,20 @@ async function run() {
             core.setFailed(`Branch ${branch} failed did not match any of the prefixes - ${prefixes}`);
             return
         }
+
+        // Check min length
+        const minLen = parseInt(core.getInput('min_length'));
+        if (branch.length < minLen) {
+            core.setFailed(`Branch ${branch} is smaller than min length specified - ${minLen}`);
+            return
+        }
+
+        // Check max length
+        const maxLen = parseInt(core.getInput('max_length'));
+        if (maxLen > 0 && branch.length > maxLen) {
+            core.setFailed(`Branch ${branch} is greater than max length specified - ${maxLen}`);
+            return
+        }
     } catch (error) {
         core.setFailed(error.message);
     }
