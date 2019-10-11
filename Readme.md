@@ -1,5 +1,5 @@
 # Action Branch Name
-<img src='https://github.com/deepakputhraya/action-branch-name/workflows/main/badge.svg'/ alt='badge'>
+![](https://github.com/deepakputhraya/action-branch-name/workflows/.github/workflows/main.yml/badge.svg)
 
 Github action to enforce naming convention on branch names
 
