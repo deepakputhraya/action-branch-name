@@ -8,9 +8,9 @@ async function validate() {
 async function run() {
     try {
         const regex = core.getInput('regex');
-        console.log(`Regex: ${regex}!`);
+        console.log(`Regex: ${regex}`);
         const allowedPrefixes = core.getInput('allowed_prefixes');
-        console.log(`Regex: ${allowedPrefixes}`);
+        console.log(`Allowed Prefixes: ${allowedPrefixes}`);
 
         // Get the JSON webhook payload for the event that triggered the workflow
         const payload = JSON.stringify(github.context.payload, undefined, 2);
