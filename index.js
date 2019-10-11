@@ -22,29 +22,32 @@ function getBranchName(eventName, payload) {
 async function run() {
     try {
         const eventName = github.context.eventName;
-        console.log(`The event name: ${eventName}`);
+        core.info(`Event name: ${eventName}`);
         if (validEvent.indexOf(eventName) < 0) {
             core.setFailed(`Invalid event: ${eventName}`);
             return;
         }
-        // TODO: validate regex
-        // TODO: validate prefixes
-
-        // Get the JSON webhook payload for the event that triggered the workflow
-        const payload = JSON.stringify(github.context.payload, undefined, 2);
-        console.log(`The event payload: ${payload}`);
 
         const branch = getBranchName(eventName, github.context.payload);
+        core.info(`Branch name: ${branch}`);
+        // Check if branch is to be ignored
+        const ignore = core.getInput('ignore');
+        if (ignore.length > 0 && ignore.split(',').some((el) => branch === el)) {
+            core.info(`Skipping checks since ${branch} is in the ignored list - ${ignore}`);
+            return
+        }
 
+        // Check if branch pass regex
         const regex = RegExp(core.getInput('regex'));
-        console.log(`Regex: ${regex}`);
+        core.info(`Regex: ${regex}`);
         if (!regex.test(branch)) {
             core.setFailed(`Branch ${branch} failed to pass match regex - ${regex}`);
             return
         }
-        const prefixes = core.getInput('allowed_prefixes');
-        console.log(`Allowed Prefixes: ${prefixes}`);
 
+        // Check if branch starts with a prefix
+        const prefixes = core.getInput('allowed_prefixes');
+        core.info(`Allowed Prefixes: ${prefixes}`);
         if (prefixes.length > 0 && !prefixes.split(',').some((el) => branch.startsWith(el))) {
             core.setFailed(`Branch ${branch} failed did not match any of the prefixes - ${prefixes}`);
             return

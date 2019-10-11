@@ -8,6 +8,9 @@ inputs:
   allowed_prefixes:
     description: 'Comma separated list of prefix that must be used in every branch. eg: feature,hotfix,JIRA-'
     default: ''
+  ignore:
+    description: 'Comma separated list of branch names to ignore. eg: master,develop'
+    default: 'master'
 runs:
   using: 'node12'
   main: 'index.js'
