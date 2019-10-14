@@ -1,4 +1,4 @@
-# Action Branch Name
+# Branch naming rules
 <img alt="GitHub Actions status" src="https://github.com/deepakputhraya/action-branch-name/workflows/main/badge.svg">
 
 Github action to enforce naming convention on branch names
