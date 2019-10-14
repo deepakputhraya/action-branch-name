@@ -1,4 +1,4 @@
-name: 'Github Branch name rules'
+name: 'Branch name rules'
 description: 'Github action to enforce naming convention on branch names'
 author: 'deepakputhraya'
 inputs:
