@@ -17,12 +17,25 @@ jobs:
     steps:
       - uses: deepakputhraya/action-branch-name@master
         with:
-          regex: '([a-z])+\/([a-z])+' # Regex the branch should match. This example enforces grouping
+          regex: '([a-z]+)\/([a-z]+)' # Regex the branch should match. This example enforces grouping
           allowed_prefixes: 'feature,stable,fix' # All branches should start with the given prefix
           ignore: master,develop # Ignore exactly matching branch names from convention
           min_length: 5 # Min length of the branch name
           max_length: 20 # Max length of the branch name
 ```
+
+## Note
+
+Regex will pass `true` on any valid match within the branch name (read: substring).
+
+Using example regex above:
+
+```
+feature/foo                 MATCH
+feature/foo/bar             MATCH
+feature/foo.bar/fizz-bang   MATCH
+```
+For strict matching, use anchors like `'^([a-z]+)\/([a-z]+)$'` which would only allow the first branch name
 
 ## License
 The scripts and documentation in this project are released under the [MIT License](./LICENSE)
