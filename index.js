@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const validEvent = ['push', 'pull_request'];
+const validEvent = ['push', 'pull_request', 'pull_request_target'];
 
 function getBranchName(eventName, payload) {
     let branchName;
