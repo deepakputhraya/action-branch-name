@@ -29,12 +29,24 @@ async function run() {
 
         const branch = getBranchName(eventName, github.context.payload);
         core.info(`Branch name: ${branch}`);
+        
         // Check if branch is to be ignored
-        const ignore = core.getInput('ignore');
-        if (ignore.length > 0 && ignore.split(',').some((el) => branch === el)) {
-            core.info(`Skipping checks since ${branch} is in the ignored list - ${ignore}`);
-            return
-        }
+		// Split the ignore input by comma and trim each pattern
+		const ignorePatterns = core.getInput('ignore').split(',').map((e) => e.trim());
+
+		// Check if the branch matches any of the provided regex patterns in the ignorePatterns list
+		const shouldIgnore = ignorePatterns.some((pattern) => {
+		    // Create a RegExp object using the pattern
+		    const regex = new RegExp(pattern);
+		    // Test if the branch matches the regex pattern
+		    return regex.test(branch);
+		});
+
+		// If the branch matches one of the ignored patterns, skip the checks and return
+		if (shouldIgnore) {
+		    core.info(`Skipping checks since ${branch} matches one of the ignored patterns - ${ignorePatterns}`);
+		    return;
+		}
 
         // Check if branch pass regex
         const regex = RegExp(core.getInput('regex'));
