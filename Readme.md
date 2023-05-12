@@ -19,7 +19,7 @@ jobs:
         with:
           regex: '([a-z])+\/([a-z])+' # Regex the branch should match. This example enforces grouping
           allowed_prefixes: 'feature,stable,fix' # All branches should start with the given prefix
-          ignore: master,develop # Ignore exactly matching branch names from convention
+          ignore: master,develop,^long-running-.* # Ignore branches matching regex patterns in the list (e.g., exactly matching branch names or starting with "long-running-")
           min_length: 5 # Min length of the branch name
           max_length: 20 # Max length of the branch name
 ```

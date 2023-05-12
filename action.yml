@@ -9,7 +9,7 @@ inputs:
     description: 'Comma separated list of prefix that must be used in every branch. eg: feature,hotfix,JIRA-'
     default: ''
   ignore:
-    description: 'Comma separated list of branch names to ignore. eg: master,develop'
+    description: 'Comma separated list of regex patterns to ignore specific branches. eg: master,develop,^long-running-.*'
     default: 'master'
   min_length:
     description: 'Min length of branch name'
@@ -22,5 +22,4 @@ runs:
   using: 'node12'
   main: 'index.js'
 branding:
-  icon: 'alert-triangle'
-  color: 'gray-dark'
+  icon: 'alert
